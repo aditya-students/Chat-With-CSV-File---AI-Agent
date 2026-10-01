@@ -121,7 +121,7 @@ def build_agent(df: pd.DataFrame) -> None:
 
     all_tools = [get_data_info, filter_data, analyze_data]
 
-    llm = ChatGroq(model="openai/gpt-oss-20b", api_key=api_key)
+    llm = ChatGroq(model="llama-3.3-70b-versatile", api_key=api_key)
 
     system_prompt = """You are an expert data analyst assistant. You help users explore and analyze CSV data interactively.
 
