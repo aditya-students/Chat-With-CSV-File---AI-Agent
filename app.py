@@ -87,13 +87,20 @@ def analyze_data(expression: str) -> str:
     if df is None:
         return "No CSV loaded."
 
-    forbidden = ["__", "import", "open(", "exec", "os.", "sys."]
+    SAFE_BUILTINS = {
+        "len": len, "round": round, "sum": sum, "min": min, "max": max,
+        "abs": abs, "sorted": sorted, "list": list, "dict": dict,
+        "str": str, "int": int, "float": float, "range": range,
+    }
+
+    forbidden = ["__", "import", "open(", "exec(", "eval(", "os.", "sys.",
+                 "read_", "to_", "subprocess"]
     for item in forbidden:
         if item in expression:
             return f"Error: Access denied. Expression contains restricted element '{item}'."
 
     try:
-        result = eval(expression, {"__builtins__": {}}, {"df": df, "pd": pd})
+        result = eval(expression, {"__builtins__": SAFE_BUILTINS}, {"df": df, "pd": pd})
         return str(result)
     except Exception as e:
         return f"Error: {e}"
