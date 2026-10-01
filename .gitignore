@@ -1,19 +1,5 @@
-# Virtual environment
-venv/
-.venv/
-env/
-
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-
-# Environment variables & secrets
 .env
-
-# Uploads directory
 uploads/
-
-# IDE files
-.vscode/
-.idea/
+__pycache__/
+venv/
+*.pyc
